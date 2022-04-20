@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# 构建前端,在当前目录产生一个dist文件夹
 BUILD_WEB() {
   curl -L https://disk.hiing.cn/file/dist.tar.gz -o dist.tar.gz
   tar -zxvf dist.tar.gz
