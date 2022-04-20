@@ -56,7 +56,7 @@ BUILD() {
   if [ "$1" == "release" ]; then
     xgo -out "$appName" -ldflags="$ldflags" -tags=jsoniter .
   else
-    xgo -go go-1.17.1 -targets=linux/arm64,windows/amd64 -out "$appName" -ldflags="$ldflags" -tags=jsoniter .
+    xgo -targets=linux/arm64,windows/amd64 -out "$appName" -ldflags="$ldflags" -tags=jsoniter .
   fi
   mkdir -p "build"
   mv alist-* build
