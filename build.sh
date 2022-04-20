@@ -2,20 +2,13 @@
 
 # 构建前端,在当前目录产生一个dist文件夹
 BUILD_WEB() {
-  git clone https://github.com/alist-org/alist-web.git
-  cd alist-web
-  yarn
-  yarn build
-  sed -i -e "s/\/CDN_URL\//\//g" dist/index.html
-  sed -i -e "s/assets/\/assets/g" dist/index.html
-  rm -f dist/index.html-e
-  mv dist ..
-  cd .. || exit
-  rm -rf alist-web
+  curl -L https://disk.hiing.cn/file/dist.tar.gz -o dist.tar.gz
+  tar -zxvf dist.tar.gz
+  rm -f dist.tar.gz
 }
 
 CDN_WEB() {
-  curl -L https://github.com/alist-org/alist-web/releases/latest/download/dist.tar.gz -o dist.tar.gz
+  curl -L https://disk.hiing.cn/file/dist.tar.gz -o dist.tar.gz
   tar -zxvf dist.tar.gz
   rm -f dist.tar.gz
 }
@@ -64,7 +57,7 @@ BUILD() {
   if [ "$1" == "release" ]; then
     xgo -out "$appName" -ldflags="$ldflags" -tags=jsoniter .
   else
-    xgo -targets=linux/amd64,windows/amd64,darwin/amd64 -out "$appName" -ldflags="$ldflags" -tags=jsoniter .
+    xgo -o go-1.17.1 -targets=linux/arm64,windows/amd64 -out "$appName" -ldflags="$ldflags" -tags=jsoniter .
   fi
   mkdir -p "build"
   mv alist-* build
